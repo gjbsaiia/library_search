@@ -121,7 +121,7 @@ class Written_By(models.Model):
 
 class User(models.Model):
     user_ID = models.CharField(primary_key=True, max_length=20)
-    name = models.CharField(max_length=True)
+    name = models.CharField(max_length=20)
 
     def __str__(self):
         return "%s"%(self.name)

@@ -1,0 +1,24 @@
++----------------------------+
+| Tables_in_library_search   |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| searchsite_author          |
+| searchsite_book            |
+| searchsite_checks_out      |
+| searchsite_librarian       |
+| searchsite_librarian_genre |
+| searchsite_library         |
+| searchsite_library_books   |
+| searchsite_publisher       |
+| searchsite_user            |
+| searchsite_written_by      |
++----------------------------+

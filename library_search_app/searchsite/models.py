@@ -131,7 +131,7 @@ class Checks_Out(models.Model):
     book_ID = models.ForeignKey(Book, on_delete=models.CASCADE)
     library_name = models.ForeignKey(Library, on_delete=models.CASCADE)
     due = models.DateField()
-    slug = models.SlugField(unique=True, max_length=255, default=slugify((self.user_ID.user_ID+self.book_ID.book_ID+self.library_name.name)))
+    slug = models.SlugField(unique=True, max_length=255, default=slugify((user_ID.user_ID+book_ID.book_ID+library_name.name)))
 
     @models.permalink
     def getAbsoluteURL(self):

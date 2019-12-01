@@ -133,9 +133,9 @@ class Checks_Out(models.Model):
     due = models.DateField()
     slug = models.SlugField(unique=True, max_length=255, default=slugify((self.user_ID.user_ID+self.book_ID.book_ID+self.library_name.name))
 
-      @models.permalink
-      def getAbsoluteURL(self):
-          return ('check_out_receipt', (),
+    @models.permalink
+    def getAbsoluteURL(self):
+      return ('check_out_receipt', (),
                 {
                     'slug': self.slug,
                 })

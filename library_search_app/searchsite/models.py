@@ -131,14 +131,6 @@ class Checks_Out(models.Model):
     book_ID = models.ForeignKey(Book, on_delete=models.CASCADE)
     library_name = models.ForeignKey(Library, on_delete=models.CASCADE)
     due = models.DateField()
-    slug = models.SlugField(unique=True, max_length=255, default=slugify((user_ID.user_ID+book_ID.book_ID+library_name.name)))
-
-    @models.permalink
-    def getAbsoluteURL(self):
-      return ('check_out_receipt', (),
-                {
-                    'slug': self.slug,
-                })
 
     def __str__(self):
         return """
@@ -155,10 +147,7 @@ class Checks_Out(models.Model):
         ************************************
         *                                  *
         ************************************
-
-        You can find this receipt at:
-           %s
-        """ % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due), self.getAbsoluteURL())
+        """ % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due))
 
     class Meta:
         unique_together = ((user_ID, book_ID, library_name))

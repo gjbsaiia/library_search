@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['54.187.211.235']
 # Application definition
 
 INSTALLED_APPS = [
+    'searchsite',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -50,13 +50,6 @@ def validate_count(count):
     if count <= 0:
         raise ValidationError('ERROR: Non-real book count.')
 
-# class Post(models.Model):
-#     title = models.CharField(max_length=255)
-#     slug = models.SlugField(unique=True, max_length=255)
-#     content = models.TextField()
-#     created_on = models.DateTimeField(auto_now_add=True)
-#     author = models.TextField()
-
 class Library(models.Model):
     name = models.CharField(primary_key=True, max_length=20)
     address = models.CharField(unique=True, max_length=30)
@@ -138,6 +131,14 @@ class Library(models.Model):
 #     book_ID = models.ForeignKey(Book, on_delete=models.CASCADE)
 #     library_name = models.ForeignKey(Library, on_delete=models.CASCADE)
 #     due = models.DateField()
+#     slug = models.SlugField(unique=True, max_length=255, default=slugify((self.user_ID.user_ID+self.book_ID.book_ID+self.library_name.name))
+#
+#       @models.permalink
+#       def getAbsoluteURL(self):
+#           return ('check_out_receipt', (),
+#                 {
+#                     'slug': self.slug,
+#                 })
 #
 #     def __str__(self):
 #         return """
@@ -152,7 +153,12 @@ class Library(models.Model):
 #         *   %s                             *
 #         *                                  *
 #         ************************************
-#         """ % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due))
+#         *                                  *
+#         ************************************
+#
+#         You can find this receipt at:
+#            %s
+#         """ % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due), self.getAbsoluteURL())
 #
 #     class Meta:
 #         unique_together = ((user_ID, book_ID, library_name))

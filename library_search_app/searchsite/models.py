@@ -150,7 +150,7 @@ class Checks_Out(models.Model):
         """ % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due))
 
     class Meta:
-        unique_together = ((user_ID, book_ID, library_name))
+        unique_together = (("user_ID", "book_ID", "library_name"))
 
 class Librarian(models.Model):
     librarian_ID = models.CharField(primary_key=True, max_length=20)
@@ -171,4 +171,4 @@ class Librarian_Genre(models.Model):
         return "%s:     %s"%(str(self.librarian_ID), self.genre)
 
     class Meta:
-        unique_together = ((librarian_ID, genre))
+        unique_together = (("librarian_ID", "genre"))

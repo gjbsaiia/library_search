@@ -7,15 +7,16 @@
 
 
 {% block content %}
-  {% if 'user_id' not in session %}
+  {% if user_id %}
+    <h3>Welcome {{ user_name }}!</h3>
+  {% else %}
     <h3>Log In</h3>
-      <form action="" method="post">
-        {% csrf_token %}
-        <table>
-        {{ form.as_table }}
-        </table>
+    <form action="" method="post">
+      {% csrf_token %}
+      <table>
+      {{ form.as_table }}
+      </table>
       <input type="submit" value="Submit">
     </form>
-  {% else %}
-    <h3>Welcome {{ session["user_name"] }}!</h3>
+  {% endif %}
 {% endblock %}

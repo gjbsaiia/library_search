@@ -27,6 +27,8 @@ checkout_filters = [
 
 # Create your views here.
 def login(request):
+    if 'user_name' in request.session:
+        return render(request, 'login.html', {'form': form, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -38,7 +40,7 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form, "session": request.session,})
+    return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "",)
 
 def index(request):
     return HttpResponse('Hello Worlddd')

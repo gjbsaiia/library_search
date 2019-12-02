@@ -16,9 +16,19 @@
     </table>
     <input type="submit" value="Search">
   </form>
+  {% if searched %}
+    <hr>
+    <h4>Search Results</h4>
+    <hr>
+    <hr>
+    {% if '-1' in results %}
+      <h5>{{ results.'-1' }}</h5>
+    {% else %}
       {% for key in results %}
-        <h5>{{ results[key] }}</h5>
+        <h5>{{ results.key }}</h5>
         <a href="{% url 'checkout' key %}">checkout</a>
         <hr>
       {% endfor %}
+    {% endif %}
+  {% endif %}
 {% endblock %}

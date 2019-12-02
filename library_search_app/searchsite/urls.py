@@ -4,12 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.login, name='index'),
-    path('allbooks/', views.books, name='books'),
-    # path('$/', views.books, name='books'),
     path('libraries/', views.libraries, name='libraries'),
     path('libraries/<libID>/', views.listBooksAt, name='booksAt')
-    # path('$/', views.authors, name='authors'),
-    # path('$/', views.librarians, name='librarians'),
-    # path('$/', views.checked_out, name='checked out oooks'),
-    # path('$/', views.users, name='users'),
+    path('search/', views.search, name='search'),
+    path('search/<lbID>/', views.checkout, name='checkout')
+    path('librarians/', views.librarians, name='librarians'),
 ]

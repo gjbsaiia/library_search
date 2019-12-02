@@ -9,6 +9,15 @@
 {% block content %}
   {% if user_id %}
     <h3>Welcome {{ user_name }}!</h3>
+    {% if booksOut %}
+      <h4>You currently have some books checked out:</h4>
+      {% for each in booksOut %}
+          <hr>
+          <h5>{{ each }}</h5>
+      {% endfor %}
+    {% else %}
+      <h4>You currently have no books checked out.</h4>
+    {% endif %}
   {% else %}
     <h3>Log In</h3>
     <form action="" method="post">

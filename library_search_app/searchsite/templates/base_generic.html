@@ -15,9 +15,9 @@
     <hr>
     <span>
       <a href="{% url 'index' %}">Home</a>
-      <a href="">Search</a>
+      <a href="{% url 'search' %}">Search</a>
       <a href="{% url 'libraries' %}">Libraries</a>
-      <a href="">Librarians</a>
+      <a href="{% url 'librarians' %}">Librarians</a>
     <span>
     {% block content %}
     {% endblock %}

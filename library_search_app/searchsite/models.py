@@ -172,9 +172,11 @@ class Checks_Out(models.Model):
         unique_together = (("user_ID", "book_ID", "library_name"))
 
 class Librarian(models.Model):
-    librarian_ID = models.CharField(primary_key=True, max_length=20)
     name = models.CharField(max_length=20)
     library_name = models.ForeignKey(Library, on_delete=models.CASCADE)
+
+    def getLibraryName(self):
+        return self.library_name.name
 
     def __str__(self):
         return "%s at %s"%(self.name, str(self.library_name))

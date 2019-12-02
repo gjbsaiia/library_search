@@ -34,6 +34,7 @@ def login(request):
             return HttpResponseRedirect('/index/')
     else:
         form = LoginForm()
+
     return render(request, 'login.html', {'form': form})
 
 def index(request):

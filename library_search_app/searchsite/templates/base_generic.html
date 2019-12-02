@@ -7,34 +7,21 @@
     <link href="img/icon.jpg" rel="shortcut icon" id="favico" type="images/vnd.microsoft.icon">
     <meta name="description" content="Find the book you're looking for!">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-      .sidebar-nav {
-        margin-top: 20px;
-        padding: 0;
-        list-style: none;
-      }
-    </style>
   </head>
   <body>
     {% block title %}
     <h1>Library Search</h1>
     {% endblock %}
     <hr>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-2">
-          <ul class="sidebar-nav">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="">Search</a></li>
-            <li><a href="{% url 'libraries' %}">Libraries</a></li>
-            <li><a href="">Librarians</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-10 ">
-          {% block content %}
-          {% endblock %}
-        </div>
-      </div>
-    </div>
+    <span>
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="">Search</a></li>
+        <li><a href="{% url 'libraries' %}">Libraries</a></li>
+        <li><a href="">Librarians</a></li>
+      </ul>
+    <span>
+    {% block content %}
+    {% endblock %}
   </body>
 </html>

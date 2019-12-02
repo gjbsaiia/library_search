@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+Bookfrom django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .lib_forms import LoginForm, searchForm
@@ -48,7 +48,7 @@ def libraries(request):
 
 def listBooksAt(request, libID):
     lib_instance = get_object_or_404(Library, pk=libID)
-    books = Library_Books.objects.filter(library_name = libID)
+    books = Library_Book.objects.filter(library_name = libID)
     authors = {}
     for each in books:
         names = []
@@ -100,43 +100,43 @@ def runQuery(params):
     filter = ""
     books = ''
     if(params["book_title"]):
-        books = Books.objects.filter(title=params["book_title"])
+        books = Book.objects.filter(title=params["book_title"])
     if(params["genre"]):
         if books:
             books = books.filter(genre=params["genre"])
         else:
-            books = Books.objects.filter(genre=params["genre"])
+            books = Book.objects.filter(genre=params["genre"])
     if(params["datePublished"]):
         if books:
             books = books.filter(datePublished=params["datePublished"])
         else:
-            books = Books.objects.filter(datePublished=params["datePublished"])
+            books = Book.objects.filter(datePublished=params["datePublished"])
     if(params["publisher_name"]):
         publisherIDs = Publisher.objects.filter(name=params["publisher_name"])
         if books:
             books = books.filter(publisher_ID__in=publisherIDs)
         else:
-            books = Books.objects.filter(publisher_ID__in=publisherIDs)
+            books = Book.objects.filter(publisher_ID__in=publisherIDs)
     if(params["author_name"]):
         authorIDs = Author.objects.filter(name=params["author_name"])
         bookIDs = Written_By.objects.filter(author_ID__in=authorIDs)
         if books:
             books = books.filter(pk__in=bookIDs)
         else:
-            books = Books.objects.filter(pk__in=bookIDs)
+            books = Book.objects.filter(pk__in=bookIDs)
     if(params["library_name"]):
         if(books):
-            lib_books = Library_Books.objects.filter(library_name = params["library_name"], book_ID__in=books)
+            lib_books = Library_Book.objects.filter(library_name = params["library_name"], book_ID__in=books)
         else:
-            lib_books = Library_Books.objects.filter(library_name = params["library_name"])
+            lib_books = Library_Book.objects.filter(library_name = params["library_name"])
     else:
-        lib_books = Library_Books.objects.filter(book_ID__in=books)
+        lib_books = Library_Book.objects.filter(book_ID__in=books)
     return lib_books
 
 def checkout(request, lbID):
     if 'user_name' not in request.session:
         return HttpResponseRedirect('')
-    book_instance = get_object_or_404(Library_Books, pk=lbID)
+    book_instance = get_object_or_404(Library_Book, pk=lbID)
     result = ""
     if(book_instance.count > 0):
         checkedout = Checks_Out.objects.new_checkout(user=request.session["user_id"], book=book_instance.book_ID, library=book_instance.library_name)

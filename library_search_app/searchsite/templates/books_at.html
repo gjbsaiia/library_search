@@ -1,19 +1,23 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  <h3>Libraries in your area:</h3>
-  {% if liblist %}
-    {% for lib in liblist %}
-      <h5>
-        <a href="/booksAt/{{ lib.name }}/"> {{ lib.name }} </a>
-        <p>
-          Address: {{ lib.address }}
-          Date Founded: {{ lib.dateFounded }}
-        </p>
-      </h5>
-    {% endfor %}
+  <h3> Catalogue for {{ library.name }}:</h3>
+  {% if books %}
+    <ul>
+      {% for book in books %}
+        <li>
+          <bold> {{ str(book) }}</bold>
+          <p>
+            Author(s):
+            {% for author in authors[book.id] %}
+              {{ author }}<br />
+            {% endfor %}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
   {% else %}
     <h5>
-    Unfortunately, there are no libraries in your area.
+    Unfortunately, there are no books at this library
     </h5>
   {% endif %}
 {% endblock %}

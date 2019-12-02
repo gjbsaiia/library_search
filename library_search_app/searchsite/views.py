@@ -55,8 +55,9 @@ def listBooksAt(request, libID):
         ids = Written_By.objects.filter(book_ID=each.id)
         for author in ids:
             names.append(Author.objects.get(pk=author.id).name)
-        authors.update({each: names})
+        authors.update({each.id: names})
     context = {
+        'library': lib_instance,
         'books': books,
         'authors': authors,
     }

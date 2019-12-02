@@ -78,7 +78,7 @@ def search(request):
     if 'user_name' not in request.session:
         return HttpResponseRedirect('')
     results = {}
-    results.update({-1: "No books found. :("})
+    results.update({"-1": "No books found. :("})
     if request.method == 'POST':
         form = searchForm(request.POST)
         if form.is_valid():

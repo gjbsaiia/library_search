@@ -21,8 +21,8 @@
     <h4>Search Results</h4>
     <hr>
     <hr>
-    {% if -1 in results %}
-    <h5>{{ results[-1] }}</h5>
+    {% if '-1' in results %}
+    <h5>{{ results['-1'] }}</h5>
     {% else %}
       {% for key in results %}
         <h5>{{ results[key] }}</h5>

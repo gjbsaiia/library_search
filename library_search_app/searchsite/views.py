@@ -28,7 +28,7 @@ checkout_filters = [
 # Create your views here.
 def login(request):
     if 'user_name' in request.session:
-        return render(request, 'login.html', {'form': form, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+        return render(request, 'login.html', {'form': "", "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():

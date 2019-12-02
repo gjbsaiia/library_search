@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timedelta, date
 
 # Create your models here.
 from django.template.defaultfilters import slugify
@@ -59,7 +60,6 @@ class Library(models.Model):
         return "%s, %s" % (self.name, self.address)
 
 class Publisher(models.Model):
-    publisher_ID = models.CharField(primary_key=True, max_length=20)
     name = models.CharField(max_length=20)
     location = models.CharField(max_length=20, null=True)
 
@@ -67,7 +67,6 @@ class Publisher(models.Model):
         return "%s"%(self.name)
 
 class Book(models.Model):
-    book_ID = models.CharField(primary_key=True, max_length=30)
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=255, null=True)
     genre = models.CharField(max_length=18,
@@ -91,7 +90,6 @@ class Book(models.Model):
             return "TITLE: %s,GENRE: %s,PUBLISHER: %s,DATE PUBLISHED: %s\nDESCRIPTION:\n%s"%(self.title, self.genre, str(self.publisher_ID), "PUBLISH DATE NOT LISTED", self.description)
 
 class Author(models.Model):
-    author_ID = models.CharField(primary_key=True, max_length=20)
     name = models.CharField(max_length=20)
     DOB = models.DateField(null=True)
 
@@ -119,18 +117,39 @@ class Written_By(models.Model):
     class Meta:
         unique_together = (("book_ID", "author_ID"))
 
+
+class User_Manager(models.Manager):
+    def newUser(self, name):
+        user = self.create(name=name)
+        return user
+
 class User(models.Model):
-    user_ID = models.CharField(primary_key=True, max_length=20)
     name = models.CharField(max_length=20)
+
+    objects = User_Manager()
 
     def __str__(self):
         return "%s"%(self.name)
+
+
+class CheckOut_Manager(models.Manager):
+    def new_checkout(self, user, book, library):
+        query = Library_Books.objects.filter(library_name=library.name, book_ID=book.id).exclude(count__lt=1)
+        if(query):
+            lb = Library_Books.objects.get(pk = query[0].id)
+            lb -= 1
+            lb.save()
+            duedate = date.today() + timedelta(days=3)
+            checkout = self.create(user_ID=user.id, book_ID=book.id, library_name=library.name, due=duedate)
+            return checkout
+
 
 class Checks_Out(models.Model):
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     book_ID = models.ForeignKey(Book, on_delete=models.CASCADE)
     library_name = models.ForeignKey(Library, on_delete=models.CASCADE)
     due = models.DateField()
+    objects = CheckOut_Manager()
 
     def __str__(self):
         return """

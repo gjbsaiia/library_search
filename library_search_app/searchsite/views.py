@@ -87,7 +87,7 @@ def search(request):
             if books:
                 results = {}
                 for book in books:
-                    results.update({book.id: str(book)}
+                    results.update({book.id: str(book)})
             return render(request, 'search.html', {'form': form, 'searched': True, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
     else:
         form = searchForm()

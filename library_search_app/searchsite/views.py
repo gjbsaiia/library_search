@@ -75,10 +75,10 @@ def librarians(request):
     return render(request, "librarian_list.html", context)
 
 def search(request):
-    if 'user_name' not in request.session:
-        return HttpResponseRedirect('')
     results = {}
     results.update({"-1": "No books found. :("})
+    if 'user_name' not in request.session:
+        return HttpResponseRedirect('')
     if request.method == 'POST':
         form = searchForm(request.POST)
         if form.is_valid():

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Library, Book, Author, Librarian, Checks_Out
+from .models import Library, Book, Author, Librarian, Checks_Out, User
 from .lib_forms import LoginForm
 
 book_filters = [
@@ -30,7 +30,7 @@ def login(request):
     try:
         if(request.POST['user_name']):
             name =request.POST['user_name']
-            user = User.objects.newUser(name=form.getData())
+            user = User.objects.newUser(name=name)
             return HttpResponseRedirect('index/')
     except KeyError:
         return render(request, 'login.html', context={})

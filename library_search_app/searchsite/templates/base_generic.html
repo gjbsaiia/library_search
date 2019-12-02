@@ -14,12 +14,10 @@
     {% endblock %}
     <hr>
     <span>
-      <ul>
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="">Search</a></li>
-        <li><a href="{% url 'libraries' %}">Libraries</a></li>
-        <li><a href="">Librarians</a></li>
-      </ul>
+      <a href="{% url 'index' %}">Home</a>
+      <a href="">Search</a>
+      <a href="{% url 'libraries' %}">Libraries</a>
+      <a href="">Librarians</a>
     <span>
     {% block content %}
     {% endblock %}

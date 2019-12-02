@@ -45,7 +45,7 @@ def libraries(request):
     }
     return render(request, 'library_list.html', context)
 
-def listBooksAt(request, pk):
+def listBooksAt(request, libID):
     lib_instance = get_object_or_404(Library, pk=pk)
     books = Library_Books.objects.filter(library_name = pk)
     authors = {}

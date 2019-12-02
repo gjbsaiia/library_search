@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Library, Book, Author, Librarian, Checks_Out
-from lib_forms import LoginForm
+from .lib_forms import LoginForm
 
 book_filters = [
     'library_name',

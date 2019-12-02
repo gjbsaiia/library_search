@@ -21,12 +21,12 @@
     <h4>Search Results</h4>
     <hr>
     <hr>
-    {% if results[0][1] < 0 %}
-    <h5>{{ results[0][0] }}</h5>
+    {% if -1 in results %}
+    <h5>{{ results[-1] }}</h5>
     {% else %}
-      {% for each in results %}
-        <h5>{{ each[0] }}</h5>
-        <a href="{% url 'checkout' each[1].id %}">checkout</a>
+      {% for key in results %}
+        <h5>{{ results[key] }}</h5>
+        <a href="{% url 'checkout' key %}">checkout</a>
         <hr>
       {% endfor %}
     {% endif %}

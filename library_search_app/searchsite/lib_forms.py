@@ -38,7 +38,3 @@ class searchForm(forms.Form):
 
     def getData(self):
         return self.cleaned_data
-
-def makeIntoChoice(array):
-    choices = ()
-    for each in array:

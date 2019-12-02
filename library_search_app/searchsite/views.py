@@ -40,7 +40,7 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "",)
+    return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "",})
 
 def index(request):
     return HttpResponse('Hello Worlddd')

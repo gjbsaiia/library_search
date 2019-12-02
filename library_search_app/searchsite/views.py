@@ -88,11 +88,11 @@ def search(request):
                 results = {}
                 for book in books:
                     results.update({book.id: str(book)}
-            return render(request, 'search.html', {'form': form, 'searched': True, 'results': results, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+            return render(request, 'search.html', {'form': form, 'searched': True, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
     else:
         form = searchForm()
 
-    return render(request, 'search.html', {'form': form, 'searched': False, 'results': results,  "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+    return render(request, 'search.html', {'form': form, 'searched': False, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
 
 def runQuery(params):
     filter = ""

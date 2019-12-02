@@ -3,7 +3,8 @@
   <h3>Log In</h3>
   <form action="{% url 'login' %}" method="post">
   	{ % csrf_token % }
-    {{ form.as_table }}
+    <label>Your Name:</label>
+    <input type="text" name="user_name" id = "user_name" value = "user"/>
     <input type="submit" value="Login" />
   </form>
 { % endblock % }

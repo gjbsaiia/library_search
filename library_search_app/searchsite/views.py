@@ -27,15 +27,21 @@ checkout_filters = [
 
 # Create your views here.
 def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = User.objects.newUser(name=form.getData())
-            return HttpResponseRedirect('/index/')
-    else:
-        form = LoginForm()
-
-    return render(request, 'login.html', {'form': form})
+    try:
+        name = request.POST['user_name']
+        user = User.objects.newUser(name=form.getData())
+        return HttpResponseRedirect('/index/')
+    except KeyError:
+        return render(request, 'login.html')
+    # if request.method == 'POST':
+    #     form = LoginForm(request.POST)
+    #     if form.is_valid():
+    #         user = User.objects.newUser(name=form.getData())
+    #         return HttpResponseRedirect('/index/')
+    # else:
+    #     form = LoginForm()
+    #
+    # return render(request, 'login.html', {'form': form})
 
 def index(request):
     return HttpResponse('Hello Worlddd')

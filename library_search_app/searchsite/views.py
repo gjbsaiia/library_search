@@ -106,11 +106,11 @@ def runQuery(params):
             books = books.filter(genre=params["genre"])
         else:
             books = Book.objects.filter(genre=params["genre"])
-    if(params["datePublished"]):
+    if(params["date_published"]):
         if books:
-            books = books.filter(datePublished=params["datePublished"])
+            books = books.filter(datePublished=params["date_published"])
         else:
-            books = Book.objects.filter(datePublished=params["datePublished"])
+            books = Book.objects.filter(datePublished=params["date_published"])
     if(params["publisher_name"]):
         publisherIDs = Publisher.objects.filter(name=params["publisher_name"])
         if books:

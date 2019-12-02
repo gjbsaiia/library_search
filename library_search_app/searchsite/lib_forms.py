@@ -1,22 +1,5 @@
 from django import forms
-
-GENRE_CHOICES = (
-    ('Non-Fiction',     'non-fiction'),
-    ('Children',         'children'),
-    ('Drama',            'drama'),
-    ('Fantasy',          'fantasy'),
-    ('Graphic Novel',    'graphic novel'),
-    ('Horror',           'horror'),
-    ('Mystery',          'mystery'),
-    ('Poetry',           'poetry'),
-    ('Romance',          'romance'),
-    ('Satire',           'satire'),
-    ('Biography',        'biography'),
-    ('Auto-Biography',   'auto-biography'),
-    ('Thriller',         'thriller'),
-    ('Young Adult',      'young adult'),
-    ('other',            'other'),
-)
+from .models import Library, GENRE_CHOICES
 
 class LoginForm(forms.Form):
     user_name = forms.CharField(label='Name', max_length = 20)

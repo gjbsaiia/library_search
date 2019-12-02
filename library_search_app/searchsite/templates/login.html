@@ -2,8 +2,8 @@
 {% block content % }
   <h3>Log In</h3>
   <form action="" method="post">
-  	{% csrf_token %}
+  	{ % csrf_token % }
     {{ form.as_table }}
     <input type="submit" value="Login" />
   </form>
-{% endblock %}
+{ % endblock % }

@@ -7,18 +7,15 @@
 
 
 {% block content %}
-  <h3>Log In</h3>
-    <form action="" method="post">
-      {% csrf_token %}
-      <table>
-      {{ form.as_table }}
-      </table>
-    <input type="submit" value="Submit">
-  </form>
-  <!-- <form action="{% url 'login' %}" method="post">
-  	{% csrf_token %}
-    <label>Your Name:</label>
-    <input type="text" name="user_name" id = "user_name"/>
-    <input type="submit" value="Login" />
-  </form> -->
+  {% if 'user_id' not in session %}
+    <h3>Log In</h3>
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+      <input type="submit" value="Submit">
+    </form>
+  {% else %}
+    <h3>Welcome {{ session["user_name"] }}!</h3>
 {% endblock %}

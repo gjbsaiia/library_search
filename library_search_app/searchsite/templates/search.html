@@ -16,9 +16,17 @@
     </table>
     <input type="submit" value="Search">
   </form>
-      {% for key in results %}
-        <h5>{{ results.key }}</h5>
-        <a href="{% url 'checkout' key %}">checkout</a>
-        <hr>
+  <hr>
+  {% if results %}
+    {% if bookIds %}
+      {% for each in results %}
+        {% for id in bookIds %}
+          <h5>{{ each }}</h5>
+          <a href="{% url 'checkout' id %}">checkout</a>
+        {% endfor %}
       {% endfor %}
+    {% else %}
+      <h5>{{ results[0] }}</h5>
+    {% endif %}
+  {% endif %}
 {% endblock %}

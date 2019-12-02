@@ -65,7 +65,7 @@ def listBooksAt(request, libID):
 
 def librarians(request):
     organized = []
-    libs = Librarians.objects.all()
+    libs = Librarian.objects.all()
     for lib in libs:
         genre = Librarian_Genre.objects.filter(librarian_ID=lib)
         organized.append([lib.name, lib.getLibraryName(), genre.genre])
@@ -75,8 +75,8 @@ def librarians(request):
     return render(request, "librarian_list.html", context)
 
 def search(request):
-    results = {}
-    results.update({"-1": "No books found. :("})
+    results = []
+    bookIds = []
     if 'user_name' not in request.session:
         return HttpResponseRedirect('')
     if request.method == 'POST':
@@ -84,15 +84,17 @@ def search(request):
         if form.is_valid():
             params = form.getData()
             books = runQuery(params)
-            if books:
-                results = {}
+            if not books:
+                results = ["No books found. Sorry."]
+            else:
                 for book in books:
-                    results.update({book.id: str(book)})
-            return render(request, 'search.html', {'form': form, 'searched': True, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
+                    results.append(str(book))
+                    bookIds.append(book.id)
+            return render(request, 'search.html', {'form': form, 'bookIds': bookIds, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
     else:
         form = searchForm()
 
-    return render(request, 'search.html', {'form': form, 'searched': False, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
+    return render(request, 'search.html', {'form': form, 'bookIds': bookIds, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
 
 def runQuery(params):
     filter = ""

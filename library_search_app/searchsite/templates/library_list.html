@@ -4,7 +4,7 @@
   {% if liblist %}
     {% for lib in liblist %}
       <h5>
-        <a href="/booksAt/{{ lib.name }}/"> {{ lib.name }} </a>
+        <a href="{% url 'booksAt' libID=lib.name}"> {{ lib.name }} </a>
         <p>
           Address: {{ lib.address }}
           Date Founded: {{ lib.dateFounded }}

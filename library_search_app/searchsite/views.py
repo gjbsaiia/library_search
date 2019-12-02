@@ -77,7 +77,7 @@ def librarians(request):
 def search(request):
     if 'user_name' not in request.session:
         return HttpResponseRedirect('')
-    results = []
+    results = [[False, -1]]
     if request.method == 'POST':
         form = searchForm(request.POST)
         if form.is_valid():

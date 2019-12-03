@@ -68,7 +68,7 @@ def librarians(request):
     libs = Librarian.objects.all()
     for lib in libs:
         genre = Librarian_Genre.objects.filter(librarian_ID=lib)
-        organized.append([lib.name, lib.getLibraryName(), genre.genre])
+        organized.append([lib.name, lib.getLibraryName(), genre])
     context = {
         'librarians': organized,
     }

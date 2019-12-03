@@ -5,12 +5,22 @@
     <ul>
       {% for book in books %}
         <li>
-          <bold> {{ str(book) }}</bold>
+          <bold> Titile: {{ book.title }}</bold>
           <p>
             Author(s):
-            {% for author in authors[book.id] %}
+            {% for author in authors.(book.id) %}
               {{ author }}<br />
             {% endfor %}
+          </p>
+          <p>
+            Description:<br />
+            {{ books.description }}
+          </p>
+          <p>
+            Genre: {{ books.genre }}
+          </p>
+          <p>
+            Date Published: {{ books.datePublished }}
           </p>
         </li>
       {% endfor %}

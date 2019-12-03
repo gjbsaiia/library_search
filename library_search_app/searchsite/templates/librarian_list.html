@@ -4,10 +4,13 @@
   {% if librarians %}
     {% for lib in librarians %}
       <h5>
-        <bold>{{ lib[0] }}</bold>
+        <bold>{{ lib.0 }}</bold>
         <p>
-          Library: {{ lib[1] }}<br />
-          Genre: {{ lib[2]] }}<br />
+          Library: {{ lib.1 }}<br />
+          Genre:<br />
+					{% for each in lib.2 %}
+  					{{ each.genre }} <br />
+          {% endfor %}
         </p>
       </h5>
     {% endfor %}

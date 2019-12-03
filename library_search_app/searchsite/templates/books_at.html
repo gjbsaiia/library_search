@@ -5,7 +5,9 @@
     <ul>
       {% for book in organized %}
         <li>
-          <bold> Titile: {{ book.0.title }}</bold>
+          <p>
+            <em> Titile: {{ book.0.title }}</em>
+          </p>
           <p>
             Author(s):
             {% for author in book.1 %}

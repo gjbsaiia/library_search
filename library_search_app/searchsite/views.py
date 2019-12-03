@@ -48,7 +48,7 @@ def libraries(request):
 
 def listBooksAt(request, libID):
     lib_instance = get_object_or_404(Library, pk=libID)
-    books = Library_Books.objects.filter(library_name = libID)
+    books = Library_Book.objects.filter(library_name = libID)
     authors = {}
     for each in books:
         names = []
@@ -126,11 +126,11 @@ def runQuery(params):
             books = Book.objects.filter(pk__in=bookIDs)
     if(params["library_name"]):
         if(books):
-            lib_books = Library_Books.objects.filter(library_name = params["library_name"], book_ID__in=books)
+            lib_books = Library_Book.objects.filter(library_name = params["library_name"], book_ID__in=books)
         else:
-            lib_books = Library_Books.objects.filter(library_name = params["library_name"])
+            lib_books = Library_Book.objects.filter(library_name = params["library_name"])
     else:
-        lib_books = Library_Books.objects.filter(book_ID__in=books)
+        lib_books = Library_Book.objects.filter(book_ID__in=books)
     return lib_books
 
 def checkout(request, lbID):

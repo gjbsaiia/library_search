@@ -138,7 +138,7 @@ def runQuery(params):
 def checkout(request, lbID):
     if 'user_name' not in request.session:
         return HttpResponseRedirect('')
-    book_instance = get_object_or_404(Library_Book, pk=lbID)
+    book_instance = get_object_or_404(Library_Books, pk=lbID)
     result = ""
     if(book_instance.count > 0):
         checkedout = Checks_Out.objects.new_checkout(user=request.session["user_id"], book=book_instance.book_ID, library=book_instance.library_name)

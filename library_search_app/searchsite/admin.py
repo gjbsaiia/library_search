@@ -9,7 +9,6 @@ from searchsite.models import Publisher
 from searchsite.models import Librarian_Genre
 from searchsite.models import Library_Books
 from searchsite.models import Written_By
-from searchsite.models import Checks_Out
 from searchsite.models import User
 
 # Register your models here.

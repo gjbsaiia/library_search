@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['ec2-54-187-211-235.us-west-2.compute.amazonaws.com']
 # Application definition
 
 INSTALLED_APPS = [
+	'django_extensions',
     'searchsite',
     'django.contrib.admin',
     'django.contrib.auth',

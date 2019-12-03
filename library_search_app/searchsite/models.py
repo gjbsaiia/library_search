@@ -104,6 +104,9 @@ class Library_Books(models.Model):
     def __str__(self):
         return "%s, has %d copies of %s" % (str(self.library_name), self.count, str(self.book_ID.getTitle()))
 
+	def getBook(self):
+		return self.book_ID
+
     class Meta:
         unique_together = (("library_name", "book_ID"))
 

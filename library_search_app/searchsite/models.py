@@ -102,7 +102,7 @@ class Library_Books(models.Model):
     count = models.FloatField(validators=[validate_count])
 
     def __str__(self):
-        return "%s, has %d copies of %s" % (str(self.library_name), str(self.count), str(self.book_ID.getTitle()))
+        return "%s, has %d copies of %s" % (str(self.library_name), self.count, str(self.book_ID.getTitle()))
 
     class Meta:
         unique_together = (("library_name", "book_ID"))

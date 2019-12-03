@@ -136,7 +136,7 @@ class CheckOut_Manager(models.Manager):
     def new_checkout(self, user, book, library):
         query = Library_Books.objects.filter(library_name=library.name, book_ID=book.id).exclude(count__lt=1)
         if(query):
-            lb = Library_Books.objects.get(pk = query[0].id)
+            lb = Library_Books.objects.get(pk = query[0])
             lb -= 1
             lb.save()
             duedate = date.today() + timedelta(weeks=1)

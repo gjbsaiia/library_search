@@ -1,26 +1,29 @@
 {% extends "base_generic.html" %}
 {% block content %}
   <h3> Catalogue for {{ library.name }}:</h3>
-  {% if books %}
+  {% if organized %}
     <ul>
-      {% for book in books %}
+      {% for book in organized %}
         <li>
-          <bold> Titile: {{ book.title }}</bold>
+          <bold> Titile: {{ book.0.title }}</bold>
           <p>
             Author(s):
-            {% for author in authors.(book.id) %}
+            {% for author in book.1 %}
               {{ author }}<br />
             {% endfor %}
           </p>
           <p>
             Description:<br />
-            {{ books.description }}
+            {{ book.0.description }}
           </p>
           <p>
-            Genre: {{ books.genre }}
+            Genre: {{ book.0.genre }}
           </p>
           <p>
-            Date Published: {{ books.datePublished }}
+            Date Published: {{ book.0.datePublished }}
+          </p>
+          <p>
+            Publisher: {{ book.2 }}
           </p>
         </li>
       {% endfor %}

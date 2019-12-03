@@ -1,13 +1,13 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  <h3>Libraries in your area:</h3>
+  <h3>Librarians in your area:</h3>
   {% if librarians %}
     {% for lib in librarians %}
       <h5>
-        <bold>{{ lib.0 }}</bold>
         <p>
+          <em>{{ lib.0 }}</em>
           Library: {{ lib.1 }}<br />
-          Genre:<br />
+          Genre:<br /><br />
 					{% for each in lib.2 %}
   					{{ each.genre }} <br />
           {% endfor %}

@@ -49,17 +49,17 @@ def libraries(request):
 def listBooksAt(request, libID):
     lib_instance = get_object_or_404(Library, pk=libID)
     books = Library_Books.objects.filter(library_name = libID)
-    authors = {}
+    organized = []
     for each in books:
         names = []
+        publisher = Publisher.objects.filter(pk=each.publisher_ID)
         ids = Written_By.objects.filter(book_ID=each.id)
         for author in ids:
             names.append(Author.objects.get(pk=author.id).name)
-        authors.update({each.id: names})
+        organized.append([book, names, publisher])
     context = {
         'library': lib_instance,
-        'books': books,
-        'authors': authors,
+        'organized': organized,
     }
     return render(request, 'books_at.html', context)
 

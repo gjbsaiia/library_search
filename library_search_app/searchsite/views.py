@@ -34,6 +34,10 @@ def login(request):
             request.session['user_name'] = user.name
             request.session['user_id'] = user.id
             request.session.modified = True
+            booksout = Checks_Out.objects.filter(user_ID=request.session['user_id'],)
+            books_out = []
+            for each in booksout:
+                books_out.append(str(each))
             return render(request, 'login.html', {'form': '', "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
     else:
         form = LoginForm()

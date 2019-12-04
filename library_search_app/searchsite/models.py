@@ -40,11 +40,14 @@ GENRE_CHOICES = (
     ('Thriller',         'thriller'),
     ('Young Adult',      'young adult'),
     ('other',            'other'),
+    ('',                 ''),
 )
 
 def validate_genre(genre):
     genre = genre.lower()
     if genre not in genres:
+        raise ValidationError('ERROR: unsupported genre.')
+    if genre in '':
         raise ValidationError('ERROR: unsupported genre.')
 
 def validate_count(count):

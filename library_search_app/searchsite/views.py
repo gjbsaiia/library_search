@@ -171,7 +171,7 @@ def checkout(request, lbID):
         result = str(checkedout)
     else:
         result = "BOOK CURRENTLY OUT OF STOCK"
-    return render(request, "checkout.html", {"result": result, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+    return render(request, "checkout.html", {"results": result, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
 
 def returns(request, chID):
     if 'user_name' not in request.session:

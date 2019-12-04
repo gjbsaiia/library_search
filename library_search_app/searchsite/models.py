@@ -167,7 +167,7 @@ class Checks_Out(models.Model):
     objects = CheckOut_Manager()
 
     def __str__(self):
-        return "CHECKED OUT FROM: %s.   %s IS DUE ON %s" % (str(self.library_name), self.book_ID.getTitle(), str(self.due))
+        return "CHECKED OUT FROM: '%s'. BOOK '%s', IS DUE ON '%s'" % (str(self.library_name), self.book_ID.getTitle(), str(self.due))
 
     class Meta:
         unique_together = (("user_ID", "book_ID", "library_name"))

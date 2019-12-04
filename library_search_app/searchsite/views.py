@@ -173,7 +173,7 @@ def checkout(request, lbID):
         result = "BOOK CURRENTLY OUT OF STOCK"
     return render(request, "checkout.html", {"result": result, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
 
-def returnBook(request, chID):
+def returns(request, chID):
     if 'user_name' not in request.session:
         return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "", "booksOut": [],})
     checked_out = get_object_or_404(Checks_Out, pk=chID)

@@ -28,7 +28,7 @@
             Publisher: {{ book.2 }}
           </p>
 					<br />
-					<a href="{% url 'checkout' id %}">checkout</a>
+					<a href="{% url 'checkout' book.0.id %}">checkout</a>
         </li>
 				<br />
       {% endfor %}

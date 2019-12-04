@@ -21,7 +21,7 @@
     {% if bookIds %}
       {% for each in results %}
 				<h5>{{ each }}</h5>
-				<a href="{% url 'checkout' id %}">checkout</a>
+				<a href="{% url 'checkout' each.id %}">checkout</a>
       {% endfor %}
     {% else %}
       <h5>{{ results.0 }}</h5>

@@ -17,13 +17,11 @@
     <input type="submit" value="Search">
   </form>
   <hr>
-  {% if results %}
-    {% if bookIds %}
+  {% if results.0 %}
+    {% if results.1 %}
       {% for each in results %}
-        {% for id in bookIds %}
-          <h5>{{ each }}</h5>
-          <a href="{% url 'checkout' id %}">checkout</a>
-        {% endfor %}
+        <h5>{{ each.0 }}</h5>
+        <a href="{% url 'checkout' each.1 %}">checkout</a>
       {% endfor %}
     {% else %}
       <h5>{{ results.0 }}</h5>

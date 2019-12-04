@@ -83,7 +83,6 @@ def librarians(request):
 
 def search(request):
     results = []
-    bookIds = []
     if 'user_name' not in request.session:
         return HttpResponseRedirect('')
     if request.method == 'POST':
@@ -92,12 +91,11 @@ def search(request):
             params = form.getData()
             books = runQuery(params)
             if not books:
-                results = ["No books found. Sorry."]
+                results = ["No books found. Sorry.", ""]
             else:
                 for book in books:
-                    results.append(str(book))
-                    bookIds.append(book.id)
-            return render(request, 'search.html', {'form': form, 'bookIds': bookIds, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
+                    results.append([str(book), book.id])
+            return render(request, 'search.html', {'form': form, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
     else:
         form = searchForm()
 

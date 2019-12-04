@@ -92,11 +92,14 @@ def search(request):
             results = []
             params = form.getData()
             books = runQuery(params)
-            if not books:
-                results = ["No books found. Sorry.", ""]
+            if books == -1:
+                results.append(["Please enter some parameter.", ""])
             else:
-                for book in books:
-                    results.append([str(book), book.id])
+                if not books:
+                    results.append(["No books found. Sorry.", ""])
+                else:
+                    for book in books:
+                        results.append([str(book), book.id])
             return render(request, 'search.html', {'form': form, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
     else:
         form = searchForm()
@@ -104,27 +107,33 @@ def search(request):
     return render(request, 'search.html', {'form': form, 'results': results, 'user_id': request.session['user_id'], 'user_name': request.session['user_name'],})
 
 def runQuery(params):
+    wereParams = False
     filter = ""
     books = ''
     if(params["book_title"]):
         books = Book.objects.filter(title=params["book_title"])
+        wereParams = True
     if(params["genre"]):
+        wereParams = True
         if books:
             books = books.filter(genre=params["genre"])
         else:
             books = Book.objects.filter(genre=params["genre"])
     if(params["date_published"]):
+        wereParams = True
         if books:
             books = books.filter(datePublished=params["date_published"])
         else:
             books = Book.objects.filter(datePublished=params["date_published"])
     if(params["publisher_name"]):
+        wereParams = True
         publisherIDs = Publisher.objects.filter(name=params["publisher_name"])
         if books:
             books = books.filter(publisher_ID__in=publisherIDs)
         else:
             books = Book.objects.filter(publisher_ID__in=publisherIDs)
     if(params["author_name"]):
+        wereParams = True
         authorIDs = Author.objects.filter(name=params["author_name"])
         bookIDs = Written_By.objects.filter(author_ID__in=authorIDs)
         if books:
@@ -132,13 +141,17 @@ def runQuery(params):
         else:
             books = Book.objects.filter(pk__in=bookIDs)
     if(params["library_name"]):
+        wereParams = True
         if(books):
             lib_books = Library_Books.objects.filter(library_name = params["library_name"], book_ID__in=books)
         else:
             lib_books = Library_Books.objects.filter(library_name = params["library_name"])
     else:
         lib_books = Library_Books.objects.filter(book_ID__in=books)
-    return lib_books
+    if wereParams:
+        return lib_books
+    else:
+        return -1
 
 def checkout(request, lbID):
     if 'user_name' not in request.session:

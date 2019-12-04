@@ -17,14 +17,14 @@
     <input type="submit" value="Search">
   </form>
   <hr>
-  {% if results.0 %}
-    {% if results.1 %}
+  {% if results.0.0 %}
+    {% if results.0.1 %}
       {% for each in results %}
         <h5>{{ each.0 }}</h5>
         <a href="{% url 'checkout' each.1 %}">checkout</a>
       {% endfor %}
     {% else %}
-      <h5>{{ results.0 }}</h5>
+      <h5>{{ results.0.0 }}</h5>
     {% endif %}
   {% endif %}
 {% endblock %}

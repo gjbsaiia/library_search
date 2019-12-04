@@ -22,7 +22,7 @@ checkout_filters = [
 # Create your views here.
 def login(request):
     if 'user_name' in request.session:
-        u = User.objects.get(pk = request.session['user_id'])
+        u = User.objects.filter(pk = request.session['user_id'])
         if(u):
             booksout = Checks_Out.objects.filter(user_ID=request.session['user_id'],)
             books_out = []
@@ -178,7 +178,7 @@ def returnBook(request, chID):
     checked_out = get_object_or_404(Checks_Out, pk=chID)
     book = checked_out.book_ID
     bk = Library_Books.objects.filter(book_ID=checked_out.book_ID, library_name=checked_out.library_name)
-    if(bk[0]):
+    if(bk):
         bk[0].incCount()
         Checks_Out.objects.get(pk=chID).delete()
         return render(request, "return.html", {"result": True, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})

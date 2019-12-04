@@ -85,7 +85,7 @@ def search(request):
     results = []
     results.append(["",""])
     if 'user_name' not in request.session:
-        return HttpResponseRedirect(render(request, 'login.html', {'form': form, "user_id": "", "user_name": "", "booksOut": [],})
+        return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "", "booksOut": [],})
     if request.method == 'POST':
         form = searchForm(request.POST)
         if form.is_valid():

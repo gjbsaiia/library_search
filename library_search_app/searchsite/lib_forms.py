@@ -15,7 +15,7 @@ class searchForm(forms.Form):
     library_name = forms.CharField(label='Library',max_length=20, required=False)
     publisher_name = forms.CharField(label='Publisher', max_length=20, required=False)
     book_title = forms.CharField(label='Book Title', max_length=30, required=False)
-    genre = forms.ChoiceField(label='Genre',choices=GENRE_CHOICES, initial='')
+    genre = forms.ChoiceField(label='Genre',choices=GENRE_CHOICES, initial='', required=False)
     author_name = forms.CharField(label='Author', max_length=20, required=False)
     date_published = forms.DateField(label="Date Published", required=False)
 

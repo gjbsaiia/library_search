@@ -56,13 +56,14 @@ def listBooksAt(request, libID):
     organized = []
     for each in books:
         names = []
+        library_book = each
         book = each.book_ID
         publisher = book.publisher_ID
         wby = Written_By.objects.filter(book_ID=each.book_ID)
         authors = []
         for each in wby:
             authors.append(each.author_ID)
-        organized.append([book, authors, publisher])
+        organized.append([book, authors, publisher, library_book])
     context = {
         'library': lib_instance,
         'organized': organized,

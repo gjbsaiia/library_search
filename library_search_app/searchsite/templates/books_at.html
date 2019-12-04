@@ -27,7 +27,10 @@
           <p>
             Publisher: {{ book.2 }}
           </p>
+					<br />
+					<a href="{% url 'checkout' id %}">checkout</a>
         </li>
+				<br />
       {% endfor %}
     </ul>
   {% else %}

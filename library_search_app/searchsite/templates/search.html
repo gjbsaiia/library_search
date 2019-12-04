@@ -25,8 +25,9 @@
       <ul>
       {% for each in results %}
         <li>
-        <h5>{{ each.0 }}</h5>
-        <a href="{% url 'checkout' each.1 %}">checkout</a>
+        <p>{{ each.0 }}
+          <a href="{% url 'checkout' each.1 %}"><button>checkout</button></a>
+        </p>
         </li>
       {% endfor %}
       </ul>

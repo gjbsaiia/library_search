@@ -22,11 +22,17 @@ checkout_filters = [
 # Create your views here.
 def login(request):
     if 'user_name' in request.session:
-        booksout = Checks_Out.objects.filter(user_ID=request.session['user_id'],)
-        books_out = []
-        for each in booksout:
-            books_out.append(str(each))
-        return render(request, 'login.html', {'form': '', "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
+        u = Users.objects.filter(pk = request.session['user_id'])
+        if(u):
+            booksout = Checks_Out.objects.filter(user_ID=request.session['user_id'],)
+            books_out = []
+            for each in booksout:
+                books_out.append(str(each))
+            return render(request, 'login.html', {'form': '', "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
+        else:
+            del(request.session['user_name'])
+            del(request.session['user_id'])
+            request.session.modified = True
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():

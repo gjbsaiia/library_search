@@ -20,6 +20,6 @@ class searchForm(forms.Form):
     date_published = forms.DateField(label="Date Published", required=False)
 
     def getData(self):
-		data = self.cleaned_data or None
+        data = self.cleaned_data or None
         self.full_clean()
         return data

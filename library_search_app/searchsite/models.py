@@ -112,6 +112,11 @@ class Library_Books(models.Model):
         self.save()
         return self.count
 
+    def incCount(self):
+        self.count = (self.count + 1)
+        self.save()
+        return self.count
+
     def __str__(self):
         return "%s, has %d copies of %s" % (str(self.library_name), self.count, str(self.book_ID.getTitle()))
 
@@ -149,11 +154,10 @@ class CheckOut_Manager(models.Manager):
         if(qu):
             checkout = "You already checked out this book!"
         else:
-            book.decCount
+            book.decCount()
             duedate = date.today() + timedelta(weeks=1)
             checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
         return str(checkout)
-
 
 class Checks_Out(models.Model):
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)

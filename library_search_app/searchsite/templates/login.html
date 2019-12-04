@@ -11,10 +11,16 @@
     <h3>Welcome {{ user_name }}!</h3>
     {% if booksOut %}
       <h4>You currently have some books checked out:</h4>
-      {% for each in booksOut %}
-          <hr>
-          <h5>{{ each }}</h5>
-      {% endfor %}
+      <hr>
+			<ul>
+        {% for each in booksOut %}
+  					<li>
+  						<p>{{ each.0 }}<br>
+  							<a href="{% url 'return' each.1 %}"><button>Return</button></a>
+  						</p>
+  					</li>
+        {% endfor %}
+			</ul>
     {% else %}
       <h4>You currently have no books checked out.</h4>
     {% endif %}

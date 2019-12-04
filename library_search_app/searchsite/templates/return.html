@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+
+{% block title %}
+<h1>Library Search</h1>
+{% endblock %}
+
+
+{% block content %}
+  <h3>Welcome {{ user_name }}</h3>
+  <hr>
+  {% if results %}
+    <h3> Return Successful! </h3>
+    <h3>Thank you for returning your copy of {{ book.title }}.</h3>
+    <hr>
+  {% else %}
+    <h3> Returning {{ book.title }} Failed. </h3>
+    <h3>We're having trouble finding a record of this checkout. Please contact the library.</h3>
+    <hr>
+  {% endif %}
+{% endblock %}

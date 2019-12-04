@@ -22,12 +22,12 @@ checkout_filters = [
 # Create your views here.
 def login(request):
     if 'user_name' in request.session:
-        u = Users.objects.filter(pk = request.session['user_id'])
+        u = Users.objects.get(pk = request.session['user_id'])
         if(u):
             booksout = Checks_Out.objects.filter(user_ID=request.session['user_id'],)
             books_out = []
             for each in booksout:
-                books_out.append(str(each))
+                books_out.append([str(each), each.id])
             return render(request, 'login.html', {'form': '', "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
         else:
             del(request.session['user_name'])
@@ -171,3 +171,16 @@ def checkout(request, lbID):
     else:
         result = "BOOK CURRENTLY OUT OF STOCK"
     return render(request, "checkout.html", {"result": result, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+
+def returnBook(request, chID):
+    if 'user_name' not in request.session:
+        return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "", "booksOut": [],})
+    checked_out = get_object_or_404(Checks_Out, pk=chID)
+    book = checked_out.book_ID
+    bk = Library_Books.objects.filter(book_ID=checked_out.book_ID, library_name=checked_out.library_name)
+    if(bk[0]):
+        bk[0].incCount()
+        Checks_Out.objects.get(pk=chID).delete()
+        return render(request, "return.html", {"result": True, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],}))
+    else:
+        return render(request, "return.html", {"result": False, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],}))

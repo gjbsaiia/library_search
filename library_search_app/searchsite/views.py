@@ -26,7 +26,7 @@ def login(request):
         books_out = []
         for each in booksout:
             books_out.append(str(each))
-        return render(request, 'login.html', {'form': "", "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
+        return render(request, 'login.html', {'form': '', "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -34,7 +34,7 @@ def login(request):
             request.session['user_name'] = user.name
             request.session['user_id'] = user.id
             request.session.modified = True
-            return HttpResponseRedirect('')
+            return render(request, 'login.html', {'form': '', "user_id": request.session['user_id'], "user_name": request.session['user_name'], "booksOut": books_out,})
     else:
         form = LoginForm()
 

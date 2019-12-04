@@ -159,7 +159,8 @@ def checkout(request, lbID):
     book_instance = get_object_or_404(Library_Books, pk=lbID)
     result = ""
     if(book_instance.count > 0):
-        checkedout = Checks_Out.objects.new_checkout(user=request.session["user_id"], book=book_instance)
+        query = User.objects.filter(pk=request.session["user_id"])
+        checkedout = Checks_Out.objects.new_checkout(user=query[0], book=book_instance)
         result = str(checkedout)
     else:
         result = "BOOK CURRENTLY OUT OF STOCK"

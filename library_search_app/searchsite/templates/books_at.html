@@ -27,6 +27,9 @@
           <p>
             Publisher: {{ book.2 }}
           </p>
+          <p>
+            Number Available: {{ book.0.count }}
+          </p>
 					<br />
 					<a href="{% url 'checkout' book.0.id %}">checkout</a>
         </li>

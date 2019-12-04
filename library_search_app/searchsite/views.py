@@ -58,7 +58,7 @@ def listBooksAt(request, libID):
         names = []
         book = each.book_ID
         publisher = book.publisher_ID
-        wby = Written_By.objects.filter(book_ID=each.id)
+        wby = Written_By.objects.filter(book_ID=each.book_ID)
         authors = []
         for each in wby:
             authors.append(each.author_ID)

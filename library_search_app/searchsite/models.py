@@ -101,6 +101,9 @@ class Library_Books(models.Model):
     book_ID = models.ForeignKey(Book, on_delete=models.CASCADE)
     count = models.FloatField(validators=[validate_count])
 
+    def getCount(self):
+        return "%d" % self.count
+
     def __str__(self):
         return "%s, has %d copies of %s" % (str(self.library_name), self.count, str(self.book_ID.getTitle()))
 

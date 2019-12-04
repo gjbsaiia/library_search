@@ -20,10 +20,8 @@
   {% if results %}
     {% if bookIds %}
       {% for each in results %}
-        {% for id in bookIds %}
-          <h5>{{ each }}</h5>
-          <a href="{% url 'checkout' id %}">checkout</a>
-        {% endfor %}
+				<h5>{{ each }}</h5>
+				<a href="{% url 'checkout' id %}">checkout</a>
       {% endfor %}
     {% else %}
       <h5>{{ results.0 }}</h5>

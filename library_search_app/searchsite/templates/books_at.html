@@ -31,7 +31,7 @@
             Number Available: {{ book.3.getCount }}
           </p>
 					<br>
-					<a href="{% url 'checkout' book.0.id %}"><button>Checkout</button></a>
+					<a href="{% url 'checkout' {{ book.3.id }} %}"><button>Checkout</button></a>
         </li>
 				<br />
       {% endfor %}

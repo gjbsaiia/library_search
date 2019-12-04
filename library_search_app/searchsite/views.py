@@ -161,13 +161,13 @@ def runQuery(params):
         return -1
 
 def checkout(request, lbID):
-    if 'user_name' not in request.session:
+    if 'user_id' not in request.session:
         return render(request, 'login.html', {'form': form, "user_id": "", "user_name": "", "booksOut": [],})
     book_instance = get_object_or_404(Library_Books, pk=lbID)
     result = ""
     if(book_instance.count > 0):
-        query = User.objects.filter(pk=request.session["user_id"])
-        checkedout = Checks_Out.objects.new_checkout(user=query[0], book=book_instance)
+        user = User.objects.get(pk=request.session["user_id"])
+        checkedout = Checks_Out.objects.new_checkout(user=user, book=book_instance)
         result = str(checkedout)
     else:
         result = "BOOK CURRENTLY OUT OF STOCK"

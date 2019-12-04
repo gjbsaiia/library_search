@@ -107,6 +107,11 @@ class Library_Books(models.Model):
     def getCount(self):
         return "%d" % self.count
 
+    def decCount(self):
+        self.count = (self.count - 1)
+        self.save()
+        return self.count
+
     def __str__(self):
         return "%s, has %d copies of %s" % (str(self.library_name), self.count, str(self.book_ID.getTitle()))
 
@@ -142,8 +147,7 @@ class CheckOut_Manager(models.Manager):
     def new_checkout(self, user, book):
         lb = Library_Books.objects.filter(pk=book.id)
         if(lb):
-            lb.count -= 1
-            lb.save()
+            lb.decCount
             duedate = date.today() + timedelta(weeks=1)
             checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
             return checkout

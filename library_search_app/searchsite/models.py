@@ -145,12 +145,10 @@ class User(models.Model):
 
 class CheckOut_Manager(models.Manager):
     def new_checkout(self, user, book):
-        lb = Library_Books.objects.filter(pk=book.id)
-        if(lb):
-            lb.decCount
-            duedate = date.today() + timedelta(weeks=1)
-            checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
-            return checkout
+        book.decCount
+        duedate = date.today() + timedelta(weeks=1)
+        checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
+        return checkout
 
 
 class Checks_Out(models.Model):

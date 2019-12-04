@@ -145,10 +145,14 @@ class User(models.Model):
 
 class CheckOut_Manager(models.Manager):
     def new_checkout(self, user, book):
-        book.decCount
-        duedate = date.today() + timedelta(weeks=1)
-        checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
-        return checkout
+        qu = Checks_Out.objects.filter(user_ID=user, book_ID=book)
+        if(qu):
+            checkout = "You already checked out this book!"
+        else:
+            book.decCount
+            duedate = date.today() + timedelta(weeks=1)
+            checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
+        return str(checkout)
 
 
 class Checks_Out(models.Model):
@@ -159,7 +163,7 @@ class Checks_Out(models.Model):
     objects = CheckOut_Manager()
 
     def __str__(self):
-        return "Receipt for %s: \nCHECKED OUT FROM:\n   %s\n\n%s IS DUE ON %s" % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due))
+        return "Receipt for %s:<br>CHECKED OUT FROM:<br>   %s<br>%s IS DUE ON %s" % (str(self.user_ID), str(self.library_name), self.book_ID.getTitle(), str(self.due))
 
     class Meta:
         unique_together = (("user_ID", "book_ID", "library_name"))

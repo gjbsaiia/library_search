@@ -151,7 +151,7 @@ class User(models.Model):
 class CheckOut_Manager(models.Manager):
     def new_checkout(self, user, book):
         qu = Checks_Out.objects.filter(user_ID=user, book_ID=book.book_ID, library_name=book.library_name)
-        if(qu[0]):
+        if(qu):
             checkout = "You already checked out this book!"
         else:
             book.decCount()

@@ -22,7 +22,7 @@ checkout_filters = [
 # Create your views here.
 def login(request):
     if 'user_name' in request.session:
-        u = Users.objects.get(pk = request.session['user_id'])
+        u = User.objects.get(pk = request.session['user_id'])
         if(u):
             booksout = Checks_Out.objects.filter(user_ID=request.session['user_id'],)
             books_out = []

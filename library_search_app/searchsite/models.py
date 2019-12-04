@@ -157,7 +157,7 @@ class CheckOut_Manager(models.Manager):
             book.decCount()
             duedate = date.today() + timedelta(weeks=1)
             checkout = self.create(user_ID=user, book_ID=book.book_ID, library_name=book.library_name, due=duedate)
-        return str(checkout)
+        return "Checkedout %s! Please return it by %s" % (checkout.book_ID.title, str(duedate))
 
 class Checks_Out(models.Model):
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)

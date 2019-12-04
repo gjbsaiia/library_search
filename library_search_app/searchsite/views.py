@@ -182,6 +182,6 @@ def returnBook(request, chID):
     if(bk):
         bk[0].incCount()
         Checks_Out.objects.get(pk=chID).delete()
-        return render(request, "return.html", {"result": True, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+        return render(request, "returns.html", {"result": True, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
     else:
-        return render(request, "return.html", {"result": False, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})
+        return render(request, "returns.html", {"result": False, "book": book, "user_id": request.session['user_id'], "user_name": request.session['user_name'],})

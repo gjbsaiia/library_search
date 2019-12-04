@@ -16,7 +16,7 @@
         {% for each in booksOut %}
   					<li>
   						<p>{{ each.0 }}<br>
-  							<a href="{% url 'return' each.1 %}"><button>Return</button></a>
+  							<a href="{% url 'returns' each.1 %}"><button>Return</button></a>
   						</p>
   					</li>
         {% endfor %}

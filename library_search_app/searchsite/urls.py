@@ -8,6 +8,6 @@ urlpatterns = [
     path('libraries/<libID>/', views.listBooksAt, name='booksAt'),
     path('search/', views.search, name='search'),
     path('checkout/<lbID>/', views.checkout, name='checkout'),
-	path('returns/<chID>/', views.returnBook, name='returnBook'),
+	path('returns/<chID>/', views.returnBook, name='returns'),
     path('librarians/', views.librarians, name='librarians'),
 ]
